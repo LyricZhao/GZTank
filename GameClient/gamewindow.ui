@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GameWindow</class>
+ <widget class="QDialog" name="GameWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>932</width>
+    <height>847</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GAME@GZ_TANK</string>
+  </property>
+  <widget class="QTextBrowser" name="console">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>660</y>
+     <width>891</width>
+     <height>141</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Console_CON">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>640</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Console:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="StautsBar">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>810</y>
+     <width>891</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>STATUS BAR ARE READY TO CONNECT TO GAME SERVER</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Camera">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>891</width>
+     <height>631</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CAMERA IS READY FOR WIFI CONNECTION</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
