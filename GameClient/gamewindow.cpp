@@ -21,6 +21,11 @@ GameWindow::GameWindow(QString gameServerURL, QString iUserName, QWidget *parent
     QDialog(parent),
     ui(new Ui::GameWindow)
 {
+    // for safety
+    serverOnline = false;
+    server_Stream = NULL;
+    JPG_Stream = NULL;
+    keyw = NULL;
 
     // Bluebooth controller connect
     keyw = new KeyWidget;
@@ -36,13 +41,18 @@ GameWindow::GameWindow(QString gameServerURL, QString iUserName, QWidget *parent
     consolePrint(QString("Bluebooth controller load successfully."));
 
     // OpenCV init
-    inCenter = false;
-    QMessageBox:: information(this, tr("QMessageBox::information()"), "Please choose the OpenCV detection file first.");
+    inCenter = false, useOpenCV = false;
+    QMessageBox:: information(NULL, tr("INFO"), "Please choose the OpenCV detection file first.");
     faceDetect = new faceTracker;
     QString cvFilePath = QFileDialog:: getOpenFileName(this, tr("Open CV File"), " ",  tr("XML File(*.xml)"));
-    if(cvFilePath == "") return;
+    if(cvFilePath.isEmpty() || cvFilePath.isNull()) {
+        consolePrint(QString("You are not using OpenCV."));
+        goto PASS_OPENCV;
+    }
+    useOpenCV = true;
     faceDetect -> setCascadeFile(cvFilePath);
     consolePrint(QString("OpenCV starts successfully."));
+    PASS_OPENCV:
 
     // connect to wifi camera server
     JPG_Stream = new QTcpSocket(this);
@@ -79,9 +89,18 @@ GameWindow::GameWindow(QString gameServerURL, QString iUserName, QWidget *parent
 }
 
 GameWindow::~GameWindow() {
-    delete server_Stream;
-    delete JPG_Stream;
-    delete keyw;
+    if(serverOnline)
+        socketSender('o');
+
+    if(server_Stream != NULL)
+        delete server_Stream;
+
+    if(JPG_Stream != NULL)
+        delete JPG_Stream;
+
+    if(keyw != NULL)
+        delete keyw;
+
     delete ui;
 }
 
@@ -122,7 +141,9 @@ QPixmap GameWindow:: OpenCV_process(const char *data, int size) {
 
 
 #ifdef ENABLE_FACE_DETECTION
-    QVector<QRect> faces = faceDetect -> detect(&proImage);
+    QVector<QRect> faces;
+    if(useOpenCV)
+        faces = faceDetect -> detect(&proImage);
 #endif
 
     // painter
@@ -206,7 +227,8 @@ void GameWindow:: server_disconnected() {
 }
 
 void GameWindow:: socketSender(char command) {
-    server_Stream -> write(&command, 1);
+    if(serverOnline)
+        server_Stream -> write(&command, 1);
 }
 
 /*

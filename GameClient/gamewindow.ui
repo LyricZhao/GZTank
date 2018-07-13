@@ -46,7 +46,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>STATUS BAR ARE READY TO CONNECT TO GAME SERVER</string>
+    <string>STATUS BAR IS READY TO CONNECT TO GAME SERVER</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

@@ -28,11 +28,12 @@ void logWin::on_ConnectButton_clicked()
     QString userName = ui -> USR_INPUT -> text();
 
     if(serverAddr.size() == 0 || userName.size() == 0) {
-        QMessageBox:: information(this, tr("QMessageBox::information("), "The server address or your username can not be empty.");
+        QMessageBox:: information(this, tr("Error"), "The server address or your username can not be empty.");
         return;
     }
 
     GameWindow *gW = new GameWindow(serverAddr, userName);
+    gW -> setAttribute(Qt:: WA_DeleteOnClose, true);
     gW -> show();
     this -> close();
 }

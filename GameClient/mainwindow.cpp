@@ -25,12 +25,14 @@ MainWindow::~MainWindow()
 void MainWindow::on_HTP_Button_clicked()
 {
     HTP *help_win = new HTP;
+    help_win -> setAttribute(Qt:: WA_DeleteOnClose, true);
     help_win -> show();
 }
 
 void MainWindow::on_A_Button_clicked()
 {
     About *about_win = new About;
+    about_win -> setAttribute(Qt:: WA_DeleteOnClose, true);
     about_win -> show();
 }
 
@@ -42,5 +44,6 @@ void MainWindow::on_CC_Button_clicked()
 void MainWindow::on_G_Button_clicked()
 {
     logWin *lW = new logWin;
+    lW -> setAttribute(Qt:: WA_DeleteOnClose, true);
     lW -> show();
 }

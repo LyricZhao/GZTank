@@ -45,7 +45,7 @@ inline bool isShoot(char key) {
 void KeyWidget:: keyPressEvent(QKeyEvent *ev) {
     char key = ev -> key();
     if('a' <= key && key <= 'z') key ^= 32;
-    std:: cout << "pressing key: " << key << (char)key << std:: endl;
+    // std:: cout << "pressing key: " << key << std:: endl;
     if(isDir(key)) {
         int index = dirConvert(key);
         assert(index != -1);
@@ -74,7 +74,7 @@ void KeyWidget:: keyPressEvent(QKeyEvent *ev) {
 void KeyWidget:: keyReleaseEvent(QKeyEvent *ev) {
     char key = ev -> key();
     if('a' <= key && key <= 'z') key ^= 32;
-    // std:: cout << "releasing key: " << key << (char)key << std:: endl;
+    // std:: cout << "releasing key: " << key << std:: endl;
     if(isDir(key)) {
         int index = dirConvert(key);
         assert(index != -1);

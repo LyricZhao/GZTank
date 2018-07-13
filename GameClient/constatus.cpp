@@ -31,6 +31,7 @@ std:: vector<std:: string> ConStatus:: getSerialList() {
 
 void ConStatus:: showWindow() {
     ConWindow *cw = new ConWindow;
+    cw -> setAttribute(Qt:: WA_DeleteOnClose, true);
     cw -> setSerialList(getSerialList());
     cw -> setCurrentSerialPort(bluebooth.portName);
     cw -> show();

@@ -40,7 +40,7 @@ public:
 
 private:
     bool serverOnline;
-    bool inCenter;
+    bool inCenter, useOpenCV;
     int blood, shootTime, empTime, flashTime, cameraTime;
 
     QTcpSocket *JPG_Stream;
