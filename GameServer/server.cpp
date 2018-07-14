@@ -12,6 +12,7 @@ Server::Server() {
   m_clientSock[1] = -1;
   m_userNames[0] = NULL;
   m_userNames[1] = NULL;
+  m_time = time(0);
   memset(&m_clientAddr[0], 0, sizeof(m_clientAddr[0]));
   memset(&m_clientAddr[1], 0, sizeof(m_clientAddr[1]));
   pthread_mutex_init(&mutex, NULL);

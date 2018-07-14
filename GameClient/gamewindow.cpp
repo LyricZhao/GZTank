@@ -221,6 +221,7 @@ void GameWindow:: server_connected() {
     memcpy(buffer + 5, std_name.c_str(), name_size);
     server_Stream -> write(buffer, buffer_size);
     free(buffer);
+    gToRead = 0; // bug fixed
 }
 
 void GameWindow:: server_disconnected() {
@@ -228,10 +229,10 @@ void GameWindow:: server_disconnected() {
 }
 
 void GameWindow:: socketSender(char command) {
-    std:: cout << "sending " << command << std:: endl;
+    // std:: cout << "sending " << command << std:: endl;
     if(serverOnline)
         server_Stream -> write(&command, 1);
-    std:: cout << "send complete" << std:: endl;
+    // std:: cout << "send complete" << std:: endl;
 }
 
 /*
@@ -342,7 +343,7 @@ void GameWindow:: Keyboard_EMPSignal() {
     }
 
     if(!inCenter) {
-        consolePrint(QString("Not aiming"));
+        consolePrint(QString("Not aiming."));
         return;
     }
 #endif
@@ -370,7 +371,7 @@ void GameWindow:: Keyboard_FlashSignal() {
     }
 
     if(!inCenter) {
-        consolePrint(QString("Not aiming"));
+        consolePrint(QString("Not aiming."));
         return;
     }
 #endif
