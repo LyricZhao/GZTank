@@ -1,4 +1,4 @@
-##GZ Tank
+## GZ Tank
 
 A **WiFi & Bluebooth** Control Car with **Camera & Online Server & OpenCV**.
 
