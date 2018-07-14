@@ -31,7 +31,11 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="IP_INPUT"/>
+     <widget class="QLineEdit" name="IP_INPUT">
+      <property name="text">
+       <string>167.99.97.59</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

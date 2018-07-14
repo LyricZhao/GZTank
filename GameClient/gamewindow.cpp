@@ -220,6 +220,7 @@ void GameWindow:: server_connected() {
     std:: string std_name = userName.toStdString();
     memcpy(buffer + 5, std_name.c_str(), name_size);
     server_Stream -> write(buffer, buffer_size);
+    free(buffer);
 }
 
 void GameWindow:: server_disconnected() {
@@ -227,8 +228,10 @@ void GameWindow:: server_disconnected() {
 }
 
 void GameWindow:: socketSender(char command) {
+    std:: cout << "sending " << command << std:: endl;
     if(serverOnline)
         server_Stream -> write(&command, 1);
+    std:: cout << "send complete" << std:: endl;
 }
 
 /*
@@ -251,13 +254,17 @@ void GameWindow:: gServerInfoProcess(char *data) {
         statusBarUpdate += "Shoot Countdown: " + QString:: number(int_buffer[2]) + "  ";
         statusBarUpdate += "EMP Countdown: " + QString:: number(int_buffer[3]) + "  ";
         statusBarUpdate += "Flash Countdown: " + QString:: number(int_buffer[4]) + "  ";
-        statusBarUpdate += "Camera: " + (int_buffer[5] ? QString("Online") : QString("Offline"));
+        statusBarUpdate += "Camera: " + (int_buffer[5] == 0 ? QString("Online") : QString("Offline"));
 
         blood = int_buffer[1];
         shootTime = int_buffer[2];
         empTime = int_buffer[3];
         flashTime = int_buffer[4];
         cameraTime = int_buffer[5];
+
+        if(int_buffer[1] <= 0) {
+            statusBarUpdate = "DEAD";
+        }
 
         // update info
         ui -> StautsBar -> setText(statusBarUpdate);
@@ -287,6 +294,8 @@ void GameWindow:: server_readyRead() {
     }
 }
 
+# define NO_LIMT_SHOOT
+
 // actions below
 void GameWindow:: Keyboard_shootSignal() {
     if(serverOnline == false) {
@@ -294,6 +303,7 @@ void GameWindow:: Keyboard_shootSignal() {
         return;
     }
 
+#ifndef NO_LIMT_SHOOT
     if(blood <= 0) {
         consolePrint(QString("You have already died."));
         return;
@@ -308,6 +318,7 @@ void GameWindow:: Keyboard_shootSignal() {
         consolePrint(QString("Not aiming."));
         return;
     }
+#endif
 
     consolePrint(QString("Fire!!!"));
     socketSender('s');
@@ -319,6 +330,7 @@ void GameWindow:: Keyboard_EMPSignal() {
         return;
     }
 
+#ifndef NO_LIMT_SHOOT
     if(blood <= 0) {
         consolePrint(QString("You have already died."));
         return;
@@ -333,6 +345,7 @@ void GameWindow:: Keyboard_EMPSignal() {
         consolePrint(QString("Not aiming"));
         return;
     }
+#endif
 
     empTime = 1000;
     consolePrint(QString("EMP shock fired!!!"));
@@ -345,6 +358,7 @@ void GameWindow:: Keyboard_FlashSignal() {
         return;
     }
 
+#ifndef NO_LIMT_SHOOT
     if(blood <= 0) {
         consolePrint(QString("You have already died."));
         return;
@@ -359,6 +373,7 @@ void GameWindow:: Keyboard_FlashSignal() {
         consolePrint(QString("Not aiming"));
         return;
     }
+#endif
 
     flashTime = 1000;
     consolePrint(QString("Flash fired!!!"));
