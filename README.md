@@ -12,5 +12,7 @@ A **WiFi & Bluebooth** Control Car with **Camera & Online Server & OpenCV**.
 
 ## GUI 
 
-![](http://otxp6khet.bkt.clouddn.com/GZTank/pic2.jpeg)
+![](http://otxp6khet.bkt.clouddn.com/GZTank/pic4.jpeg)
+
+
 
