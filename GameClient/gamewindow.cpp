@@ -162,6 +162,7 @@ QPixmap GameWindow:: OpenCV_process(const char *data, int size) {
         painter.drawEllipse(rect);
     }
     inCenter = (inCounter > 0);
+    // std:: cout << "aiming: " << inCenter << std:: endl;
 #endif
 
     return pMap;
@@ -176,7 +177,7 @@ void GameWindow:: JPG_readyRead() {
         int *trSize = (int *) dataBuffer.data();
         toRead = *trSize;
         dataBuffer.remove(0, 4);
-        // std:: cout << toRead << std:: endl;
+        // std:: cout << "pic size = " << toRead << std:: endl;
     }
 
     assert(toRead > 0);
@@ -295,7 +296,7 @@ void GameWindow:: server_readyRead() {
     }
 }
 
-# define NO_LIMT_SHOOT
+// # define NO_LIMT_SHOOT
 
 // actions below
 void GameWindow:: Keyboard_shootSignal() {
